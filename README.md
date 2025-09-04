@@ -27,7 +27,7 @@ It creates a set of aligned atlases while leaving your original textures untouch
 
 Each map type is a separate atlas, but all share the same layout so that corresponding pixels always match between maps.
 
-# Example
+## Example
 ![Input example](Images/atlas_input.png)
 
 atlas.json:
