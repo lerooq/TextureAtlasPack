@@ -48,3 +48,27 @@ This will produce one albedo texture, one alpha texture and one normal texture.
 In this case a resolution of 512 by 512 was chosen.
 
 ![Output example](Images/atlas_output.png)
+
+atlas_metadata.json
+```json
+{
+  "Size": 512,
+  "Textures": [
+    {
+      "Albedo": "TCom_GutterCover_512_albedo.tif",
+      "X": 1,
+      "Y": 1,
+      "Width": 256,
+      "Height": 256
+    },
+    {
+      "Albedo": "PXL_20250728_114904614.png",
+      "X": 259,
+      "Y": 1,
+      "Width": 128,
+      "Height": 250
+    },
+	...
+  ]
+}
+```
