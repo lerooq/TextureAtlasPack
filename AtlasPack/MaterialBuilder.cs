@@ -8,12 +8,6 @@ namespace AtlasPack;
 
 public static class MaterialBuilder
 {
-    private struct MapConfig
-    {
-        public string Name { get; init; }
-        public Func<ImageEntry, string> MapSelector { get; init; }
-    }
-
     public static List<AtlasOutputTexture> BuildAdditionalMaps(AtlasConfig config, AtlasMetadata metadata,
         string folderPath)
     {
@@ -65,5 +59,11 @@ public static class MaterialBuilder
         }
 
         return (true, atlas);
+    }
+    
+    private struct MapConfig
+    {
+        public string Name { get; init; }
+        public Func<ImageEntry, string> MapSelector { get; init; }
     }
 }

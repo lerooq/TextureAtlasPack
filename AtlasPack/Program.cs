@@ -6,7 +6,7 @@ using AtlasPack.Models;
 using SixLabors.ImageSharp;
 
 // Configure
-var folder = args[0];
+var targetFolder = args[0];
 var configFilePath = Path.Combine(args[0], FileNames.InputConfiguration);
 
 // Load
@@ -16,17 +16,17 @@ var config = JsonSerializer.Deserialize<AtlasConfig>(
 );
 
 // Build
-var (atlas, metadata) = AtlasBuilder.BuildAtlas(folder, config!);
-var textureMaps = MaterialBuilder.BuildAdditionalMaps(config!, metadata, folder);
+var (atlas, metadata) = AtlasBuilder.BuildAtlas(targetFolder, config!);
+var textureMaps = MaterialBuilder.BuildAdditionalMaps(config!, metadata, targetFolder);
 textureMaps.Add(new AtlasOutputTexture { Image = atlas, Name = FileNames.OutputAlbedo });
 
 // Save
 foreach (var textureMap in textureMaps)
 {
-    textureMap.Image.Save(Path.Combine(folder, textureMap.Name));
+    textureMap.Image.Save(Path.Combine(targetFolder, textureMap.Name));
 }
 
-File.WriteAllText(Path.Combine(folder, FileNames.OutputMetadata),
+File.WriteAllText(Path.Combine(targetFolder, FileNames.OutputMetadata),
     JsonSerializer.Serialize(metadata,
         options: new JsonSerializerOptions
             { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }));
