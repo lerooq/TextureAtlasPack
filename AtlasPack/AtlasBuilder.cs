@@ -13,7 +13,7 @@ public static class AtlasBuilder
 
         foreach (var entry in config.Images)
         {
-            var path = Path.Combine(folderPath, entry.File);
+            var path = Path.Combine(folderPath, entry.Albedo);
             using var loadedImage = Image.Load<Rgba32>(path);
             var targetWidth = entry.Width ?? config.DefaultWidth;
             var aspectRatio = (float)loadedImage.Height / loadedImage.Width;
@@ -25,7 +25,7 @@ public static class AtlasBuilder
             {
                 EffWidth = effWidth,
                 EffHeight = effHeight,
-                File = entry.File,
+                File = entry.Albedo,
                 Image = loadedImage.Clone()
             });
         }
@@ -85,7 +85,7 @@ public static class AtlasBuilder
         {
             metadata.Images.Add(new ImageMetadata
             {
-                File = packed.File,
+                Albedo = packed.File,
                 X = packed.X + config.Padding,
                 Y = packed.Y + config.Padding,
                 Width = packed.Image.Width,
