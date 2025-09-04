@@ -32,7 +32,7 @@ public static class AtlasBuilder
 
         if (rects.Count == 0)
         {
-            return (new Image<Rgba32>(1, 1), new AtlasMetadata { Images = new List<ImageMetadata>() });
+            return (new Image<Rgba32>(1, 1), new AtlasMetadata { Textures = new List<TextureMetadata>() });
         }
 
         var maxWidth = rects.Max(r => r.EffWidth);
@@ -80,10 +80,10 @@ public static class AtlasBuilder
                 ctx.DrawImage(packed.Image, new Point(packed.X + config.Padding, packed.Y + config.Padding), 1f));
         }
 
-        var metadata = new AtlasMetadata { Images = new List<ImageMetadata>(), Size = atlasSide};
+        var metadata = new AtlasMetadata { Textures = [], Size = atlasSide};
         foreach (var packed in sortedRects)
         {
-            metadata.Images.Add(new ImageMetadata
+            metadata.Textures.Add(new TextureMetadata
             {
                 Albedo = packed.File,
                 X = packed.X + config.Padding,

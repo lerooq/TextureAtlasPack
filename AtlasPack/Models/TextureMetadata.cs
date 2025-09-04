@@ -1,6 +1,6 @@
 ﻿namespace AtlasPack.Models;
 
-public class ImageEntry : ITextureMaps
+public class TextureMetadata : ITextureMaps
 {
     public string Albedo { get; set; }
     public string? HeightMap { get; set; }
@@ -9,5 +9,8 @@ public class ImageEntry : ITextureMaps
     public string? MetallicMap { get; set; }
     public string? AlphaMap { get; set; }
     public string? AmbientOcclusionMap { get; set; }
-    public int? Width { get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
 }

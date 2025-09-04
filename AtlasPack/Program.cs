@@ -1,25 +1,36 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using AtlasPack;
+using AtlasPack.Constants;
 using AtlasPack.Models;
 using SixLabors.ImageSharp;
 
+// Configure
 var folder = args[0];
+var configFilePath = Path.Combine(args[0], FileNames.InputConfiguration);
 
-var configFilePath = args[0] + @"\atlas.json";
-
+// Load
 var config = JsonSerializer.Deserialize<AtlasConfig>(
     File.ReadAllText(configFilePath),
     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
 );
 
+// Build
 var (atlas, metadata) = AtlasBuilder.BuildAtlas(folder, config!);
+var textureMaps = MaterialBuilder.BuildAdditionalMaps(config!, metadata, folder);
+textureMaps.Add(new AtlasOutputTexture { Image = atlas, Name = FileNames.OutputAlbedo });
 
-atlas.Save(folder + @"\atlas.png");
-File.WriteAllText(folder + @"\atlas_metadata.json",
+// Save
+foreach (var textureMap in textureMaps)
+{
+    textureMap.Image.Save(Path.Combine(folder, textureMap.Name));
+}
+
+File.WriteAllText(Path.Combine(folder, FileNames.OutputMetadata),
     JsonSerializer.Serialize(metadata,
         options: new JsonSerializerOptions
             { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }));
 
-Console.WriteLine("Atlas generated: atlas.png");
-Console.WriteLine("Metadata written: atlas_metadata.json");
+// Write output
+Console.WriteLine($"Atlas textures generated: {string.Join(", ", textureMaps.Select(m => m.Name))}");
+Console.WriteLine($"Atlas metadata written: {FileNames.OutputMetadata}");

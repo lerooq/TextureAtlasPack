@@ -3,5 +3,5 @@
 public class AtlasMetadata
 {
     public int Size { get; set; }
-    public List<ImageMetadata> Images { get; set; } = new();
+    public List<TextureMetadata> Textures { get; set; } = [];
 }
