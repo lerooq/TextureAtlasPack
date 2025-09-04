@@ -1,0 +1,57 @@
+## Ignore build results
+bin/
+obj/
+
+## Ignore Rider project files
+.idea/
+*.sln.iml
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider-specific caches
+.idea/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries/
+.idea/**/dataSources/
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/httpRequests/
+
+## Rider logs
+.idea/logs/
+
+## Build logs
+*.log
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## DotCover (Rider code coverage)
+*.dotCover
+
+## Resharper
+_ReSharper*/
+*.DotSettings.user
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Visual Studio Code (in case someone uses it too)
+.vscode/
+
+## Crash dumps
+*.dmp
