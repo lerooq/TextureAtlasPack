@@ -80,7 +80,7 @@ public static class AtlasBuilder
                 ctx.DrawImage(packed.Image, new Point(packed.X + config.Padding, packed.Y + config.Padding), 1f));
         }
 
-        var metadata = new AtlasMetadata { Images = new List<ImageMetadata>() };
+        var metadata = new AtlasMetadata { Images = new List<ImageMetadata>(), Size = atlasSide};
         foreach (var packed in sortedRects)
         {
             metadata.Images.Add(new ImageMetadata
