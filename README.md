@@ -44,5 +44,7 @@ atlas.json:
   ]
 }
 ```
-This will produce one albedo texture, one alpha texture and one normal texture. In this case a resolution of 512 by 512 was chosen.
-![Texture files produced by the sample atlas.json](atlas_textures_output.png)
+This will produce one albedo texture, one alpha texture and one normal texture.  
+In this case a resolution of 512 by 512 was chosen.
+
+![Output example](atlas_output.png)
