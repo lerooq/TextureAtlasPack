@@ -28,7 +28,7 @@ It creates a set of aligned atlases while leaving your original textures untouch
 Each map type is a separate atlas, but all share the same layout so that corresponding pixels always match between maps.
 
 # Example
-![Input example](atlas_input.png)
+![Input example](Images/atlas_input.png)
 
 atlas.json:
 ```json
@@ -47,4 +47,4 @@ atlas.json:
 This will produce one albedo texture, one alpha texture and one normal texture.  
 In this case a resolution of 512 by 512 was chosen.
 
-![Output example](atlas_output.png)
+![Output example](Images/atlas_output.png)
