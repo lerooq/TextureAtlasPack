@@ -18,7 +18,12 @@ public static class AtlasBuilder
             var targetWidth = entry.Width ?? config.DefaultWidth;
             var aspectRatio = (float)loadedImage.Height / loadedImage.Width;
             var targetHeight = (int)(targetWidth * aspectRatio);
-            loadedImage.Mutate(ctx => ctx.Resize(targetWidth, targetHeight));
+            loadedImage.Mutate(ctx => ctx.Resize(new ResizeOptions
+            {
+                Size = new Size(targetWidth, targetHeight),
+                Sampler = KnownResamplers.NearestNeighbor,
+                Mode = ResizeMode.Stretch
+            }));
             var effWidth = targetWidth + 2 * config.Padding;
             var effHeight = targetHeight + 2 * config.Padding;
             rects.Add(new PackedRect
