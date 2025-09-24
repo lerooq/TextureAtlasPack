@@ -3,6 +3,8 @@ using AtlasPack.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Drawing.Processing;
+using Path = System.IO.Path;
 
 namespace AtlasPack;
 
@@ -16,7 +18,7 @@ public static class MaterialBuilder
         var mapConfigs = new List<MapConfig>
         {
             new() { Name = FileNames.OutputHeight, MapSelector = e => e.HeightMap! },
-            new() { Name = FileNames.OutputNormal, MapSelector = e => e.NormalMap! },
+            new() { Name = FileNames.OutputNormal, MapSelector = e => e.NormalMap!, BaseColor = new Rgba32(128, 128, 255, 255) },
             new() { Name = FileNames.OutputRoughness, MapSelector = e => e.RoughnessMap! },
             new() { Name = FileNames.OutputMetallic, MapSelector = e => e.MetallicMap! },
             new() { Name = FileNames.OutputAlpha, MapSelector = e => e.AlphaMap! },
@@ -26,7 +28,7 @@ public static class MaterialBuilder
         foreach (var mapConfig in mapConfigs)
         {
             var images = config.Images.Where(i => !string.IsNullOrEmpty(mapConfig.MapSelector(i))).ToList();
-            var result = BuildMap(metadata, folderPath, images, mapConfig.MapSelector);
+            var result = BuildMap(metadata, folderPath, images, mapConfig.MapSelector, mapConfig.BaseColor);
             if (result.success)
             {
                 output.Add(new AtlasOutputTexture { Image = result.image!, Name = mapConfig.Name });
@@ -37,13 +39,18 @@ public static class MaterialBuilder
     }
 
     private static (bool success, Image<Rgba32>? image) BuildMap(AtlasMetadata metadata, string folderPath,
-        List<ImageEntry> imageEntries, Func<ImageEntry, string> textureMapSelector)
+        List<ImageEntry> imageEntries, Func<ImageEntry, string> textureMapSelector, Rgba32? baseColor)
     {
         if (imageEntries.Count == 0)
             return (false, null);
 
         var atlas = new Image<Rgba32>(metadata.Size, metadata.Size);
-
+        
+        if (baseColor != null)
+        {
+            atlas.Mutate(ctx => ctx.Fill(baseColor.Value));
+        }
+        
         foreach (var imageEntry in imageEntries)
         {
             var metaData = metadata.Textures.First(i => i.Albedo == imageEntry.Albedo);
@@ -65,5 +72,6 @@ public static class MaterialBuilder
     {
         public string Name { get; init; }
         public Func<ImageEntry, string> MapSelector { get; init; }
+        public Rgba32? BaseColor { get; init; }
     }
 }
