@@ -17,12 +17,12 @@ public static class MaterialBuilder
 
         var mapConfigs = new List<MapConfig>
         {
-            new() { Name = FileNames.OutputHeight, MapSelector = e => e.HeightMap! },
+            new() { Name = FileNames.OutputHeight, MapSelector = e => e.HeightMap!, BaseColor = new Rgba32(128, 128, 128, 255) },
             new() { Name = FileNames.OutputNormal, MapSelector = e => e.NormalMap!, BaseColor = new Rgba32(128, 128, 255, 255) },
-            new() { Name = FileNames.OutputRoughness, MapSelector = e => e.RoughnessMap! },
-            new() { Name = FileNames.OutputMetallic, MapSelector = e => e.MetallicMap! },
-            new() { Name = FileNames.OutputAlpha, MapSelector = e => e.AlphaMap! },
-            new() { Name = FileNames.OutputAmbientOcclusion, MapSelector = e => e.AmbientOcclusionMap! }
+            new() { Name = FileNames.OutputRoughness, MapSelector = e => e.RoughnessMap!, BaseColor = new Rgba32(128, 128, 128, 255) },
+            new() { Name = FileNames.OutputMetallic, MapSelector = e => e.MetallicMap!, BaseColor = new Rgba32(0, 0, 0, 255) },
+            new() { Name = FileNames.OutputAlpha, MapSelector = e => e.AlphaMap!, BaseColor = new Rgba32(255, 255, 255, 255) },
+            new() { Name = FileNames.OutputAmbientOcclusion, MapSelector = e => e.AmbientOcclusionMap!, BaseColor = new Rgba32(255, 255, 255, 255) }
         };
 
         foreach (var mapConfig in mapConfigs)
